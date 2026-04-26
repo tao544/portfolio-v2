@@ -1,17 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useProjects } from '../context/ProjectsContext'
 import ProjectFormModal from './ProjectFormModal'
-
+import { fetchSettings, uploadCV, deleteCV } from '../services/api'
 const statusStyles = {
   'Completed':   'bg-green-900/30 text-green-400 border-green-800',
   'In Progress': 'bg-blue-900/30 text-blue-400 border-blue-800',
   'Planning':    'bg-yellow-900/30 text-yellow-400 border-yellow-800',
 }
 
-import { fetchSettings, uploadCV, deleteCV } from '../services/api'
-import { useState, useEffect } from 'react'
+
 
 // Add inside the component:
 const [cvUrl, setCvUrl] = useState('')
