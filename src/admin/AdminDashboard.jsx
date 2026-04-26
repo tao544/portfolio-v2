@@ -85,8 +85,8 @@ export default function AdminDashboard() {
 
       {/* Top bar */}
       <header className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
-        <div className="flex items-center gap-3">
-          <span className="text-lg font-bold font-mono text-indigo-400">&lt;DevwithTao /&gt;</span>
+        <div className="flex items-center gap-2">
+            <img src="/images/devwithlogo.png" alt="DevwithTao" className="h-8 w-auto" />
           <span className="text-gray-500 text-sm hidden sm:block">Admin Dashboard</span>
         </div>
         <div className="flex items-center gap-4">

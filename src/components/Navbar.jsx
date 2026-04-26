@@ -37,8 +37,11 @@ export default function Navbar() {
 
         {/* Logo */}
         <NavLink to="/" className="text-xl font-bold text-indigo-600 dark:text-white font-mono">
-  <span className="text-gray-900 dark:text-white">Devwith</span>
-  <span className="text-indigo-600">Tao</span>
+  <img 
+    src="/images/devwithlogo.png" 
+    alt="DevwithTao" 
+    className="h-10 w-auto"
+  />
 
         </NavLink>
 

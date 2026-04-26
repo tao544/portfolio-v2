@@ -16,8 +16,12 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
 
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold font-mono text-indigo-400">
-            &lt;DevwithTao /&gt;
+          <Link to="/" className="flex items-center">
+            <img
+              src="/images/devwithlogo.png"
+              alt="DevwithTao"
+              className="h-10 w-auto brightness-0 invert"
+            />
           </Link>
 
           {/* Links */}
@@ -59,7 +63,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2025 DevwithTao. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} DevwithTao. All Rights Reserved.</p>
           <p>Built with ❤️ using React + Tailwind CSS</p>
         </div>
 
