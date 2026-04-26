@@ -2,53 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useProjects } from '../context/ProjectsContext'
-import ProjectFormModal from './ProjectFormModal'
 import { fetchSettings, uploadCV, deleteCV } from '../services/api'
+import ProjectFormModal from './ProjectFormModal'
+
 const statusStyles = {
   'Completed':   'bg-green-900/30 text-green-400 border-green-800',
   'In Progress': 'bg-blue-900/30 text-blue-400 border-blue-800',
   'Planning':    'bg-yellow-900/30 text-yellow-400 border-yellow-800',
-}
-
-
-
-// Add inside the component:
-const [cvUrl, setCvUrl] = useState('')
-const [cvUploading, setCvUploading] = useState(false)
-const [cvMessage, setCvMessage] = useState('')
-
-useEffect(() => {
-  fetchSettings().then(s => setCvUrl(s.cvUrl)).catch(() => {})
-}, [])
-
-const handleCVUpload = async (e) => {
-  const file = e.target.files[0]
-  if (!file) return
-  if (file.type !== 'application/pdf') {
-    setCvMessage('❌ Only PDF files allowed')
-    return
-  }
-  setCvUploading(true)
-  setCvMessage('')
-  try {
-    const data = await uploadCV(file)
-    setCvUrl(data.cvUrl)
-    setCvMessage('✅ CV uploaded successfully!')
-  } catch {
-    setCvMessage('❌ Upload failed. Try again.')
-  } finally {
-    setCvUploading(false)
-  }
-}
-
-const handleCVDelete = async () => {
-  try {
-    await deleteCV()
-    setCvUrl('')
-    setCvMessage('✅ CV removed.')
-  } catch {
-    setCvMessage('❌ Failed to remove CV.')
-  }
 }
 
 export default function AdminDashboard() {
@@ -58,6 +18,13 @@ export default function AdminDashboard() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editingProject, setEditingProject] = useState(null)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
+  const [cvUrl, setCvUrl] = useState('')
+  const [cvUploading, setCvUploading] = useState(false)
+  const [cvMessage, setCvMessage] = useState('')
+
+  useEffect(() => {
+    fetchSettings().then(s => setCvUrl(s.cvUrl || '')).catch(() => {})
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -83,6 +50,36 @@ export default function AdminDashboard() {
     }
   }
 
+  const handleCVUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    if (file.type !== 'application/pdf') {
+      setCvMessage('❌ Only PDF files allowed')
+      return
+    }
+    setCvUploading(true)
+    setCvMessage('')
+    try {
+      const data = await uploadCV(file)
+      setCvUrl(data.cvUrl)
+      setCvMessage('✅ CV uploaded successfully!')
+    } catch {
+      setCvMessage('❌ Upload failed. Try again.')
+    } finally {
+      setCvUploading(false)
+    }
+  }
+
+  const handleCVDelete = async () => {
+    try {
+      await deleteCV()
+      setCvUrl('')
+      setCvMessage('✅ CV removed.')
+    } catch {
+      setCvMessage('❌ Failed to remove CV.')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-950 text-white">
 
@@ -93,18 +90,12 @@ export default function AdminDashboard() {
           <span className="text-gray-500 text-sm hidden sm:block">Admin Dashboard</span>
         </div>
         <div className="flex items-center gap-4">
-          <a
-            href="/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
+          <a href="/" target="_blank" rel="noreferrer"
+            className="text-sm text-gray-400 hover:text-white transition-colors">
             View Site ↗
           </a>
-          <button
-            onClick={handleLogout}
-            className="text-sm bg-red-900/30 hover:bg-red-900/60 text-red-400 border border-red-800 px-4 py-2 rounded-lg transition-colors"
-          >
+          <button onClick={handleLogout}
+            className="text-sm bg-red-900/30 hover:bg-red-900/60 text-red-400 border border-red-800 px-4 py-2 rounded-lg transition-colors">
             Logout
           </button>
         </div>
@@ -126,72 +117,51 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
+
         {/* CV Upload Section */}
-<div className="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-10">
-  <h2 className="text-lg font-bold text-white mb-4">📄 CV / Resume</h2>
-
-  {cvUrl ? (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <div className="flex-1">
-        <p className="text-green-400 text-sm mb-1">✅ CV is uploaded</p>
-        <a
-          href={cvUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="text-indigo-400 text-sm hover:underline break-all"
-        >
-          {cvUrl}
-        </a>
-      </div>
-      <div className="flex gap-3">
-        <label className="cursor-pointer text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
-          {cvUploading ? 'Uploading...' : 'Replace CV'}
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={handleCVUpload}
-            className="hidden"
-            disabled={cvUploading}
-          />
-        </label>
-        <button
-          onClick={handleCVDelete}
-          className="text-xs bg-red-900/30 text-red-400 border border-red-800 hover:bg-red-900/60 px-3 py-1.5 rounded-lg transition-colors"
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-  ) : (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <p className="text-gray-400 text-sm flex-1">No CV uploaded yet.</p>
-      <label className="cursor-pointer flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
-        {cvUploading ? 'Uploading...' : '⬆ Upload CV (PDF)'}
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={handleCVUpload}
-          className="hidden"
-          disabled={cvUploading}
-        />
-      </label>
-    </div>
-  )}
-
-  {cvMessage && (
-    <p className="mt-3 text-sm text-gray-300">{cvMessage}</p>
-  )}
-</div>
+        <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-10">
+          <h2 className="text-lg font-bold text-white mb-4">📄 CV / Resume</h2>
+          {cvUrl ? (
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1">
+                <p className="text-green-400 text-sm mb-1">✅ CV is uploaded</p>
+                <a href={cvUrl} target="_blank" rel="noreferrer"
+                  className="text-indigo-400 text-sm hover:underline break-all">
+                  {cvUrl}
+                </a>
+              </div>
+              <div className="flex gap-3">
+                <label className="cursor-pointer text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
+                  {cvUploading ? 'Uploading...' : 'Replace CV'}
+                  <input type="file" accept=".pdf" onChange={handleCVUpload}
+                    className="hidden" disabled={cvUploading} />
+                </label>
+                <button onClick={handleCVDelete}
+                  className="text-xs bg-red-900/30 text-red-400 border border-red-800 hover:bg-red-900/60 px-3 py-1.5 rounded-lg transition-colors">
+                  Remove
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <p className="text-gray-400 text-sm flex-1">No CV uploaded yet.</p>
+              <label className="cursor-pointer flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+                {cvUploading ? 'Uploading...' : '⬆ Upload CV (PDF)'}
+                <input type="file" accept=".pdf" onChange={handleCVUpload}
+                  className="hidden" disabled={cvUploading} />
+              </label>
+            </div>
+          )}
+          {cvMessage && <p className="mt-3 text-sm text-gray-300">{cvMessage}</p>}
+        </div>
 
         {/* Projects header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-white">
             Projects <span className="text-gray-500 font-normal text-base ml-1">({projects.length})</span>
           </h2>
-          <button
-            onClick={handleAdd}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:scale-105"
-          >
+          <button onClick={handleAdd}
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:scale-105">
             + Add Project
           </button>
         </div>
@@ -207,24 +177,13 @@ export default function AdminDashboard() {
             <p>No projects yet. Click "Add Project" to get started.</p>
           </div>
         ) : (
-          /* Projects list */
           <div className="space-y-4">
             {projects.map(project => (
-              <div
-                key={project._id}
-                className="bg-gray-900 border border-gray-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 hover:border-gray-700 transition-colors"
-              >
-                {/* Image */}
-                <img
-                  src={project.image}
-                  alt={project.title}
+              <div key={project._id}
+                className="bg-gray-900 border border-gray-800 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 hover:border-gray-700 transition-colors">
+                <img src={project.image} alt={project.title}
                   className="w-full sm:w-20 h-32 sm:h-14 object-cover rounded-lg shrink-0"
-                  onError={e => {
-                    e.target.src = `https://placehold.co/80x56/6366f1/ffffff?text=Img`
-                  }}
-                />
-
-                {/* Info */}
+                  onError={e => { e.target.src = `https://placehold.co/80x56/6366f1/ffffff?text=Img` }} />
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <h3 className="font-semibold text-white truncate">{project.title}</h3>
@@ -244,50 +203,32 @@ export default function AdminDashboard() {
                     </span>
                   </div>
                 </div>
-
-                {/* Actions */}
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
-
-                  {/* Status dropdown */}
-                  <select
-                    value={project.status}
+                  <select value={project.status}
                     onChange={e => changeStatus(project._id, e.target.value)}
-                    className="text-xs bg-gray-800 border border-gray-700 text-gray-300 rounded-lg px-2 py-1.5 focus:outline-none focus:border-indigo-500"
-                  >
+                    className="text-xs bg-gray-800 border border-gray-700 text-gray-300 rounded-lg px-2 py-1.5 focus:outline-none focus:border-indigo-500">
                     <option>Planning</option>
                     <option>In Progress</option>
                     <option>Completed</option>
                   </select>
-
-                  {/* Toggle featured */}
-                  <button
-                    onClick={() => toggleFeatured(project._id)}
+                  <button onClick={() => toggleFeatured(project._id)}
                     className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
                       project.featured
                         ? 'bg-yellow-900/30 text-yellow-400 border-yellow-800 hover:bg-yellow-900/50'
                         : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-yellow-700 hover:text-yellow-400'
-                    }`}
-                  >
+                    }`}>
                     {project.featured ? '⭐ Featured' : '☆ Feature'}
                   </button>
-
-                  {/* Edit */}
-                  <button
-                    onClick={() => handleEdit(project)}
-                    className="text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors"
-                  >
+                  <button onClick={() => handleEdit(project)}
+                    className="text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
                     Edit
                   </button>
-
-                  {/* Delete */}
-                  <button
-                    onClick={() => handleDelete(project._id)}
+                  <button onClick={() => handleDelete(project._id)}
                     className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
                       deleteConfirm === project._id
                         ? 'bg-red-600 text-white border-red-600'
                         : 'bg-red-900/30 text-red-400 border-red-800 hover:bg-red-900/60'
-                    }`}
-                  >
+                    }`}>
                     {deleteConfirm === project._id ? 'Confirm?' : 'Delete'}
                   </button>
                 </div>
@@ -297,7 +238,6 @@ export default function AdminDashboard() {
         )}
       </main>
 
-      {/* Modal */}
       {modalOpen && (
         <ProjectFormModal
           project={editingProject}
