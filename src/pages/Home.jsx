@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fadeLeft, fadeRight, fadeUp, staggerContainer, pageVariants } from '../animations/variants'
 import { useProjects } from '../context/ProjectsContext'
+import { fetchSettings } from '../services/api'
 
 const words = ["Web Developer", "Frontend Developer", "Full Stack Developer"]
 
@@ -63,7 +64,6 @@ function SkillBar({ name, percent, icon, emoji }) {
     <div className="mb-6">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          {/* Icon or Emoji */}
           {icon ? (
             <i className={`${icon} text-xl`} />
           ) : (
@@ -77,8 +77,6 @@ function SkillBar({ name, percent, icon, emoji }) {
           {percent}%
         </span>
       </div>
-
-      {/* Progress bar */}
       <div className="w-full h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
         <motion.div
           className="h-full rounded-full"
@@ -95,8 +93,6 @@ function SkillBar({ name, percent, icon, emoji }) {
           transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
         />
       </div>
-
-      {/* Level labels */}
       <div className="flex justify-between mt-1 text-xs text-gray-400">
         <span>Beginner</span>
         <span>Intermediate</span>
@@ -111,9 +107,16 @@ export default function Home() {
   const [displayed, setDisplayed] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [activeSkillTab, setActiveSkillTab] = useState('Frontend')
+  const [cvUrl, setCvUrl] = useState('#')
   const { projects } = useProjects()
 
   const featuredProjects = projects.filter(p => p.featured)
+
+  useEffect(() => {
+    fetchSettings().then(s => {
+      if (s.cvUrl) setCvUrl(s.cvUrl)
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     const current = words[wordIndex]
@@ -175,11 +178,13 @@ export default function Home() {
               >
                 → Hire Me
               </Link>
-              
               <a
-                href="src/assets/Adepoju-Taoheed-cv.pdf" target="_blank" rel="noreferrer"
-                download
-                className="flex items-center gap-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 hover:scale-105"
+                href={cvUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 hover:scale-105 ${
+                  cvUrl === '#' ? 'opacity-50 pointer-events-none' : ''
+                }`}
               >
                 ⬇ Download CV
               </a>
@@ -238,8 +243,6 @@ export default function Home() {
       {/* ── SKILLS & EXPERTISE ── */}
       <section className="py-24 px-6 md:px-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
-
-          {/* Header */}
           <motion.p
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
@@ -256,8 +259,6 @@ export default function Home() {
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="w-16 border-2 border-indigo-500 mb-10"
           />
-
-          {/* Category Tabs */}
           <motion.div
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="flex flex-wrap gap-3 mb-10"
@@ -276,8 +277,6 @@ export default function Home() {
               </button>
             ))}
           </motion.div>
-
-          {/* Skills Grid */}
           <motion.div
             key={activeSkillTab}
             initial={{ opacity: 0, y: 10 }}
@@ -285,28 +284,27 @@ export default function Home() {
             transition={{ duration: 0.3 }}
             className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm"
           >
-           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-  {activeSkillTab === 'Tools'
-    ? 'Tools & Platforms'
-    : activeSkillTab === 'Database'
-    ? 'Database & Storage'
-    : activeSkillTab === 'Soft Skills'
-    ? 'Leadership & Soft Skills'
-    : `${activeSkillTab} Development`}
-</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+              {activeSkillTab === 'Tools'
+                ? 'Tools & Platforms'
+                : activeSkillTab === 'Database'
+                ? 'Database & Storage'
+                : activeSkillTab === 'Soft Skills'
+                ? 'Leadership & Soft Skills'
+                : `${activeSkillTab} Development`}
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
               {skillCategories[activeSkillTab].map((skill, i) => (
-  <SkillBar
-    key={i}
-    name={skill.name}
-    percent={skill.percent}
-    icon={skill.icon}
-    emoji={skill.emoji}
-  />
-))}
+                <SkillBar
+                  key={i}
+                  name={skill.name}
+                  percent={skill.percent}
+                  icon={skill.icon}
+                  emoji={skill.emoji}
+                />
+              ))}
             </div>
           </motion.div>
-
         </div>
       </section>
 
@@ -314,8 +312,6 @@ export default function Home() {
       {featuredProjects.length > 0 && (
         <section className="py-24 px-6 md:px-20 bg-white dark:bg-gray-950">
           <div className="max-w-6xl mx-auto">
-
-            {/* Header */}
             <motion.p
               variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
@@ -340,8 +336,6 @@ export default function Home() {
               variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="w-16 border-2 border-indigo-500 mb-12"
             />
-
-            {/* Cards */}
             <motion.div
               variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -352,7 +346,6 @@ export default function Home() {
                   variants={fadeUp}
                   className="group relative rounded-2xl overflow-hidden shadow-md bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300"
                 >
-                  {/* Image */}
                   <div className="relative overflow-hidden h-52">
                     <img
                       src={project.image}
@@ -362,7 +355,6 @@ export default function Home() {
                         e.target.src = `https://placehold.co/600x400/6366f1/ffffff?text=${encodeURIComponent(project.title)}`
                       }}
                     />
-                    {/* Status badge */}
                     <div className="absolute top-3 right-3">
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 ${
                         project.status === 'Completed'
@@ -374,11 +366,8 @@ export default function Home() {
                         {project.status}
                       </span>
                     </div>
-
-                    {/* Slide-up overlay */}
                     <div className="absolute inset-0 bg-indigo-700/95 flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
                       <p className="text-indigo-200 text-sm mb-4 line-clamp-3">{project.description}</p>
-                      
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -391,8 +380,6 @@ export default function Home() {
                       </a>
                     </div>
                   </div>
-
-                  {/* Card body */}
                   <div className="p-5">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-semibold text-indigo-500 uppercase tracking-wide">
@@ -419,8 +406,6 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
-
-            {/* View all button */}
             <motion.div
               variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="text-center mt-12"
@@ -432,7 +417,6 @@ export default function Home() {
                 View All Projects →
               </Link>
             </motion.div>
-
           </div>
         </section>
       )}

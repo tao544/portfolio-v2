@@ -10,6 +10,48 @@ const statusStyles = {
   'Planning':    'bg-yellow-900/30 text-yellow-400 border-yellow-800',
 }
 
+import { fetchSettings, uploadCV, deleteCV } from '../services/api'
+import { useState, useEffect } from 'react'
+
+// Add inside the component:
+const [cvUrl, setCvUrl] = useState('')
+const [cvUploading, setCvUploading] = useState(false)
+const [cvMessage, setCvMessage] = useState('')
+
+useEffect(() => {
+  fetchSettings().then(s => setCvUrl(s.cvUrl)).catch(() => {})
+}, [])
+
+const handleCVUpload = async (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+  if (file.type !== 'application/pdf') {
+    setCvMessage('❌ Only PDF files allowed')
+    return
+  }
+  setCvUploading(true)
+  setCvMessage('')
+  try {
+    const data = await uploadCV(file)
+    setCvUrl(data.cvUrl)
+    setCvMessage('✅ CV uploaded successfully!')
+  } catch {
+    setCvMessage('❌ Upload failed. Try again.')
+  } finally {
+    setCvUploading(false)
+  }
+}
+
+const handleCVDelete = async () => {
+  try {
+    await deleteCV()
+    setCvUrl('')
+    setCvMessage('✅ CV removed.')
+  } catch {
+    setCvMessage('❌ Failed to remove CV.')
+  }
+}
+
 export default function AdminDashboard() {
   const { logout } = useAuth()
   const { projects, loading, deleteProject, toggleFeatured, changeStatus } = useProjects()
@@ -85,6 +127,62 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
+        {/* CV Upload Section */}
+<div className="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-10">
+  <h2 className="text-lg font-bold text-white mb-4">📄 CV / Resume</h2>
+
+  {cvUrl ? (
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="flex-1">
+        <p className="text-green-400 text-sm mb-1">✅ CV is uploaded</p>
+        <a
+          href={cvUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="text-indigo-400 text-sm hover:underline break-all"
+        >
+          {cvUrl}
+        </a>
+      </div>
+      <div className="flex gap-3">
+        <label className="cursor-pointer text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
+          {cvUploading ? 'Uploading...' : 'Replace CV'}
+          <input
+            type="file"
+            accept=".pdf"
+            onChange={handleCVUpload}
+            className="hidden"
+            disabled={cvUploading}
+          />
+        </label>
+        <button
+          onClick={handleCVDelete}
+          className="text-xs bg-red-900/30 text-red-400 border border-red-800 hover:bg-red-900/60 px-3 py-1.5 rounded-lg transition-colors"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <p className="text-gray-400 text-sm flex-1">No CV uploaded yet.</p>
+      <label className="cursor-pointer flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+        {cvUploading ? 'Uploading...' : '⬆ Upload CV (PDF)'}
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleCVUpload}
+          className="hidden"
+          disabled={cvUploading}
+        />
+      </label>
+    </div>
+  )}
+
+  {cvMessage && (
+    <p className="mt-3 text-sm text-gray-300">{cvMessage}</p>
+  )}
+</div>
 
         {/* Projects header */}
         <div className="flex items-center justify-between mb-6">

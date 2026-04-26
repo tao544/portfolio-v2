@@ -69,3 +69,37 @@ export const toggleFeaturedAPI = async (id, featured) => {
 export const changeStatusAPI = async (id, status) => {
   return updateProject(id, { status })
 }
+
+// GET cv url
+export const fetchSettings = async () => {
+  const res = await fetch(`${BASE_URL}/api/settings`)
+  if (!res.ok) throw new Error('Failed to fetch settings')
+  return res.json()
+}
+
+// UPLOAD cv — uses FormData not JSON
+export const uploadCV = async (file) => {
+  const formData = new FormData()
+  formData.append('cv', file)
+
+  const res = await fetch(`${BASE_URL}/api/settings/cv`, {
+    method: 'POST',
+    headers: {
+      'x-admin-secret': import.meta.env.VITE_ADMIN_SECRET
+      // NOTE: don't set Content-Type here — browser sets it automatically for FormData
+    },
+    body: formData
+  })
+  if (!res.ok) throw new Error('Failed to upload CV')
+  return res.json()
+}
+
+// DELETE cv
+export const deleteCV = async () => {
+  const res = await fetch(`${BASE_URL}/api/settings/cv`, {
+    method: 'DELETE',
+    headers: adminHeaders()
+  })
+  if (!res.ok) throw new Error('Failed to delete CV')
+  return res.json()
+}
