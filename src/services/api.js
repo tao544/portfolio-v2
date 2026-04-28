@@ -103,3 +103,20 @@ export const deleteCV = async () => {
   if (!res.ok) throw new Error('Failed to delete CV')
   return res.json()
 }
+
+
+// UPLOAD project image
+export const uploadProjectImage = async (file) => {
+  const formData = new FormData()
+  formData.append('image', file)
+
+  const res = await fetch(`${BASE_URL}/api/projects/upload-image`, {
+    method: 'POST',
+    headers: {
+      'x-admin-secret': import.meta.env.VITE_ADMIN_SECRET
+    },
+    body: formData
+  })
+  if (!res.ok) throw new Error('Failed to upload image')
+  return res.json()
+}

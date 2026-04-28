@@ -265,7 +265,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 rounded-2xl bg-indigo-500 blur-2xl opacity-20 scale-105" />
               <img
-                src="/images/tao-grad.jpg"
+                src="/images/second-grad.jpg"
                 alt="Taoheed"
                 className="relative w-72 md:w-96 rounded-2xl object-cover shadow-2xl border-4 border-white dark:border-gray-800"
               />

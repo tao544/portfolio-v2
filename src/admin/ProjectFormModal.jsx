@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useProjects } from '../context/ProjectsContext'
+import { uploadProjectImage } from '../services/api'
 
 const empty = {
   title: '',
@@ -23,10 +24,36 @@ export default function ProjectFormModal({ project, onClose }) {
       : empty
   )
   const [error, setError] = useState('')
+  const [imageUploading, setImageUploading] = useState(false)
+  const [imagePreview, setImagePreview] = useState(isEditing ? project.image : '')
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+  }
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']
+    if (!allowed.includes(file.type)) {
+      setError('Only JPG, PNG or WEBP images allowed')
+      return
+    }
+
+    setImageUploading(true)
+    setError('')
+
+    try {
+      const data = await uploadProjectImage(file)
+      setForm(prev => ({ ...prev, image: data.imageUrl }))
+      setImagePreview(data.imageUrl)
+    } catch {
+      setError('Image upload failed. Try again.')
+    } finally {
+      setImageUploading(false)
+    }
   }
 
   const handleSubmit = (e) => {
@@ -119,13 +146,62 @@ export default function ProjectFormModal({ project, onClose }) {
             </select>
           </div>
 
-          {/* Image URL */}
+          {/* Image Upload */}
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Image Path</label>
+            <label className="block text-sm text-gray-400 mb-1">Project Image</label>
+
+            {/* Preview */}
+            {imagePreview && (
+              <div className="mb-3 relative">
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="w-full h-40 object-cover rounded-xl border border-gray-700"
+                  onError={e => { e.target.src = `https://placehold.co/800x500/6366f1/ffffff?text=Preview` }}
+                />
+                <button
+                  type="button"
+                  onClick={() => { setImagePreview(''); setForm(prev => ({ ...prev, image: '' })) }}
+                  className="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+
+            {/* Upload button */}
+            <label className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed cursor-pointer transition-colors ${
+              imageUploading
+                ? 'border-indigo-500 bg-indigo-900/20 text-indigo-400'
+                : 'border-gray-600 hover:border-indigo-500 text-gray-400 hover:text-indigo-400'
+            }`}>
+              {imageUploading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+                  Uploading...
+                </>
+              ) : (
+                <>🖼️ {imagePreview ? 'Replace Image' : 'Upload Image'}</>
+              )}
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleImageUpload}
+                className="hidden"
+                disabled={imageUploading}
+              />
+            </label>
+
+            {/* Manual URL fallback */}
             <input
-              name="image" value={form.image} onChange={handleChange}
-              placeholder="/images/myproject.png"
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
+              name="image"
+              value={form.image}
+              onChange={(e) => {
+                handleChange(e)
+                setImagePreview(e.target.value)
+              }}
+              placeholder="Or paste image URL manually"
+              className="w-full mt-2 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
             />
           </div>
 
@@ -179,7 +255,8 @@ export default function ProjectFormModal({ project, onClose }) {
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors text-sm"
+              disabled={imageUploading}
+              className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-semibold transition-colors text-sm"
             >
               {isEditing ? 'Save Changes' : 'Add Project'}
             </button>
