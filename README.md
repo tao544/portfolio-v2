@@ -1,5 +1,9 @@
 # 🚀 DevwithTao — Full Stack Portfolio
 
+
+
+
+
 <div align="center">
 
 ![DevwithTao](https://img.shields.io/badge/DevwithTao-Portfolio-6366f1?style=for-the-badge)
@@ -10,11 +14,20 @@
 
 **A premium full-stack developer portfolio with a live admin dashboard, MongoDB backend, and Cloudinary CV management.**
 
-[🌐 Live Site](https://portfolio-v2-theta-one-81.vercel.app) · [🔐 Admin Panel](https://portfolio-v2-theta-one-81.vercel.app/admin/login) · [📧 Contact](mailto:devwithtao@gmail.com)
+[🌐 Live Site](https://portfolio-v2-theta-one-81.vercel.app) · [🔐 Admin Panel](https://portfolio-v2-theta-one-81.vercel.app/admin/login) · [📧 Contact](mailto:adepojutaoheed23@gmail.com)
 
 </div>
 
 ---
+
+## 📸 Screenshots
+
+![Home Page](./screenshots/home.png)
+![Projects Page](./screenshots/project.png)
+![Admin Dashboard](./screenshots/admin.png)
+
+---
+
 
 ## ✨ Features
 
@@ -215,7 +228,7 @@ https://your-portfolio.vercel.app/admin/login
 
 **Taoheed Adepoju** — Full Stack Developer based in Lagos, Nigeria 🇳🇬
 
-[![Email](https://img.shields.io/badge/Email-devwithtao@gmail.com-red?style=flat-square&logo=gmail)](mailto:devwithtao@gmail.com)
+[![Email](https://img.shields.io/badge/Email-adepojutaoheed23@gmail.com-red?style=flat-square&logo=gmail)](mailto:adepojutaoheed23@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Taoheed_Adepoju-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/taoheed-adepoju-72839122b)
 [![GitHub](https://img.shields.io/badge/GitHub-tao544-black?style=flat-square&logo=github)](https://github.com/tao544)
 [![Portfolio](https://img.shields.io/badge/Portfolio-DevwithTao-6366f1?style=flat-square)](https://portfolio-v2-theta-one-81.vercel.app)
