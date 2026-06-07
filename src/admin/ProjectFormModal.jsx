@@ -96,7 +96,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <input
               name="title" value={form.title} onChange={handleChange} required
               placeholder="My Awesome Project"
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 text-sm"
             />
           </div>
 
@@ -106,7 +106,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <textarea
               name="description" value={form.description} onChange={handleChange} required rows={3}
               placeholder="What does this project do?"
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 text-sm resize-none"
             />
           </div>
 
@@ -116,7 +116,7 @@ export default function ProjectFormModal({ project, onClose }) {
               <label className="block text-sm text-gray-400 mb-1">Category</label>
               <select
                 name="category" value={form.category} onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 text-sm"
               >
                 <option>Frontend</option>
                 <option>Full Stack</option>
@@ -128,7 +128,7 @@ export default function ProjectFormModal({ project, onClose }) {
               <input
                 name="year" type="number" value={form.year} onChange={handleChange}
                 min="2020" max="2030"
-                className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 text-sm"
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <label className="block text-sm text-gray-400 mb-1">Status</label>
             <select
               name="status" value={form.status} onChange={handleChange}
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 text-sm"
             >
               <option>Planning</option>
               <option>In Progress</option>
@@ -172,12 +172,12 @@ export default function ProjectFormModal({ project, onClose }) {
             {/* Upload button */}
             <label className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed cursor-pointer transition-colors ${
               imageUploading
-                ? 'border-indigo-500 bg-indigo-900/20 text-indigo-400'
-                : 'border-gray-600 hover:border-indigo-500 text-gray-400 hover:text-indigo-400'
+                ? 'border-emerald-500 bg-emerald-900/20 text-emerald-400'
+                : 'border-gray-600 hover:border-emerald-500 text-gray-400 hover:text-emerald-400'
             }`}>
               {imageUploading ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
                   Uploading...
                 </>
               ) : (
@@ -201,7 +201,7 @@ export default function ProjectFormModal({ project, onClose }) {
                 setImagePreview(e.target.value)
               }}
               placeholder="Or paste image URL manually"
-              className="w-full mt-2 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full mt-2 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 text-sm"
             />
           </div>
 
@@ -213,7 +213,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <input
               name="tech" value={form.tech} onChange={handleChange}
               placeholder="React, Tailwind CSS, Node.js"
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 text-sm"
             />
           </div>
 
@@ -223,7 +223,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <input
               name="liveUrl" value={form.liveUrl} onChange={handleChange}
               placeholder="https://myproject.com"
-              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 text-sm"
             />
           </div>
 
@@ -232,7 +232,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <input
               type="checkbox" name="featured" id="featured"
               checked={form.featured} onChange={handleChange}
-              className="w-4 h-4 accent-indigo-600"
+              className="w-4 h-4 accent-emerald-600"
             />
             <label htmlFor="featured" className="text-sm text-gray-300 cursor-pointer">
               ⭐ Mark as Featured project
@@ -256,7 +256,7 @@ export default function ProjectFormModal({ project, onClose }) {
             <button
               type="submit"
               disabled={imageUploading}
-              className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-semibold transition-colors text-sm"
+              className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-semibold transition-colors text-sm"
             >
               {isEditing ? 'Save Changes' : 'Add Project'}
             </button>

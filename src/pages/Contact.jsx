@@ -36,7 +36,7 @@ export default function Contact() {
           {/* Label */}
           <motion.p
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
+            className="text-xs font-semibold tracking-widest text-emerald-500 uppercase mb-3"
           >
             Contact
           </motion.p>
@@ -52,7 +52,7 @@ export default function Contact() {
           {/* Divider */}
           <motion.hr
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="w-16 border-2 border-indigo-500 mb-12"
+            className="w-16 border-2 border-emerald-500 mb-12"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -75,13 +75,13 @@ export default function Contact() {
                   { icon: '📍', label: 'Location', value: 'Lagos, Nigeria', href: null },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center text-xl shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-xl shrink-0">
                       {item.icon}
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 dark:text-gray-500 mb-0.5">{item.label}</p>
                       {item.href ? (
-                        <a href={item.href} className="text-gray-800 dark:text-gray-200 font-medium hover:text-indigo-600 transition-colors">
+                        <a href={item.href} className="text-gray-800 dark:text-gray-200 font-medium hover:text-emerald-600 transition-colors">
                           {item.value}
                         </a>
                       ) : (
@@ -107,7 +107,7 @@ export default function Contact() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={s.label}
-                      className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110"
+                      className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-emerald-600 hover:text-white transition-all duration-300 hover:scale-110"
                     >
                       <i className={s.icon} />
                     </a>
@@ -116,7 +116,7 @@ export default function Contact() {
               </div>
 
               {/* Availability card */}
-              <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-2xl p-6">
+              <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 rounded-2xl p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
                   <span className="font-semibold text-gray-900 dark:text-white text-sm">Available for work</span>
@@ -142,7 +142,7 @@ export default function Contact() {
                       name="user_name"
                       required
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                     />
                   </div>
                   <div>
@@ -154,7 +154,7 @@ export default function Contact() {
                       name="user_email"
                       required
                       placeholder="john@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export default function Contact() {
                     name="subject"
                     required
                     placeholder="Project Inquiry"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                   />
                 </div>
 
@@ -181,14 +181,14 @@ export default function Contact() {
                     required
                     rows={6}
                     placeholder="Tell me about your project..."
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-100"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-100"
                 >
                   {loading ? 'Sending...' : 'Send Message →'}
                 </button>

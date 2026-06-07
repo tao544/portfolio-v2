@@ -36,7 +36,7 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
+            className="text-xs font-semibold tracking-widest text-emerald-500 uppercase mb-3"
           >
             About Me
           </motion.p>
@@ -52,7 +52,7 @@ export default function About() {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
               Building Meaningful
             </h1>
-            <h1 className="text-4xl md:text-5xl font-bold text-indigo-600 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-emerald-600 leading-tight">
               Digital Experiences
             </h1>
           </motion.div>
@@ -63,7 +63,7 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="w-16 border-2 border-indigo-500 mb-12"
+            className="w-16 border-2 border-emerald-500 mb-12"
           />
 
           {/* Main content */}
@@ -107,10 +107,10 @@ export default function About() {
                   <motion.div
                     key={i}
                     variants={fadeUp}
-                    className="group border-2 border-gray-200 dark:border-gray-700 rounded-xl p-5 text-center hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-100 dark:hover:shadow-indigo-900/20 transition-all duration-300 cursor-pointer"
+                    className="group border-2 border-gray-200 dark:border-gray-700 rounded-xl p-5 text-center hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-100 dark:hover:shadow-emerald-900/20 transition-all duration-300 cursor-pointer"
                   >
                     <div className="text-3xl mb-3">{card.icon}</div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 transition-colors">
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 transition-colors">
                       {card.title}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{card.desc}</p>
@@ -128,13 +128,13 @@ export default function About() {
               className="flex-1 flex justify-center"
             >
               <div className="relative">
-                <div className="absolute -top-4 -right-4 w-full h-full rounded-2xl border-2 border-indigo-500 opacity-40" />
+                <div className="absolute -top-4 -right-4 w-full h-full rounded-2xl border-2 border-emerald-500 opacity-40" />
                 <img
                   src="/images/second-grad.jpg"
                   alt="Taoheed about"
                   className="relative w-72 md:w-96 rounded-2xl object-cover shadow-2xl border-4 border-white dark:border-gray-800"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-indigo-600 text-white rounded-xl px-4 py-3 text-center shadow-lg">
+                <div className="absolute -bottom-4 -right-4 bg-emerald-600 text-white rounded-xl px-4 py-3 text-center shadow-lg">
                   <p className="text-2xl font-bold">2+</p>
                   <p className="text-xs">Years Experience</p>
                 </div>

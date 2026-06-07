@@ -46,7 +46,7 @@ export default function Projects() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
+            className="text-xs font-semibold tracking-widest text-emerald-500 uppercase mb-3"
           >
             Projects
           </motion.p>
@@ -68,7 +68,7 @@ export default function Projects() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="w-16 border-2 border-indigo-500 mb-6"
+            className="w-16 border-2 border-emerald-500 mb-6"
           />
 
           {/* Subtitle */}
@@ -120,8 +120,8 @@ export default function Projects() {
                 }}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   active === f
-                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-indigo-900/30"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-gray-700"
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 dark:shadow-emerald-900/30"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-700"
                 }`}
               >
                 {f}
@@ -137,7 +137,7 @@ export default function Projects() {
           {/* Loading state */}
           {loading ? (
             <div className="flex justify-center items-center py-20">
-              <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+              <div className="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
             </div>
           ) : (
             <>
@@ -158,7 +158,7 @@ export default function Projects() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
-                      className="group relative rounded-2xl overflow-hidden shadow-md bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300"
+                      className="group relative rounded-2xl overflow-hidden shadow-md bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-700 transition-all duration-300"
                     >
                       {/* Image + overlay */}
                       <div className="relative overflow-hidden h-52">
@@ -191,15 +191,15 @@ export default function Projects() {
                         </div>
 
                         {/* Slide-up overlay */}
-                        <div className="absolute inset-0 bg-indigo-700/95 flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-                          <p className="text-indigo-200 text-sm mb-4 line-clamp-3">
+                        <div className="absolute inset-0 bg-emerald-700/95 flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+                          <p className="text-emerald-200 text-sm mb-4 line-clamp-3">
                             {project.description}
                           </p>
                           <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className={`self-start flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-50 transition-colors ${
+                            className={`self-start flex items-center gap-2 bg-white text-emerald-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-50 transition-colors ${
                               project.liveUrl === "#"
                                 ? "opacity-40 pointer-events-none"
                                 : ""
@@ -213,7 +213,7 @@ export default function Projects() {
                       {/* Card body */}
                       <div className="p-5">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-semibold text-indigo-500 uppercase tracking-wide">
+                          <span className="text-xs font-semibold text-emerald-500 uppercase tracking-wide">
                             {project.category}
                           </span>
                           <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1">
@@ -221,7 +221,7 @@ export default function Projects() {
                           </span>
                         </div>
 
-                        <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <h3 className="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                           {project.title}
                         </h3>
 
@@ -234,7 +234,7 @@ export default function Projects() {
                           {project.tech.slice(0, 3).map((t, i) => (
                             <span
                               key={i}
-                              className="text-xs bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 px-3 py-1 rounded-full font-medium"
+                              className="text-xs bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300 px-3 py-1 rounded-full font-medium"
                             >
                               {t}
                             </span>
@@ -250,7 +250,7 @@ export default function Projects() {
                             href={project.liveUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className={`flex items-center justify-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-colors w-full ${
+                            className={`flex items-center justify-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors w-full ${
                               project.liveUrl === "#"
                                 ? "opacity-40 pointer-events-none"
                                 : ""
@@ -284,7 +284,7 @@ export default function Projects() {
                 >
                   <button
                     onClick={() => setVisibleCount((prev) => prev + 3)}
-                    className="px-8 py-3.5 rounded-xl border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-400 font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all duration-300 hover:scale-105"
+                    className="px-8 py-3.5 rounded-xl border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 dark:border-emerald-400 font-semibold hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 dark:hover:text-white transition-all duration-300 hover:scale-105"
                   >
                     Load More Projects
                   </button>
@@ -299,18 +299,18 @@ export default function Projects() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mt-20 bg-indigo-600 dark:bg-indigo-700 rounded-2xl p-12 text-center"
+            className="mt-20 bg-linear-to-r from-emerald-600 to-emerald-500 rounded-2xl p-12 text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
               Like What You See?
             </h2>
-            <p className="text-indigo-200 mb-8 max-w-md mx-auto">
+            <p className="text-emerald-200 mb-8 max-w-md mx-auto">
               I'm always excited to work on new projects and collaborate with
               amazing teams. Let's build something incredible together!
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-white text-indigo-600 font-semibold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-all duration-300 hover:scale-105"
+              className="inline-block bg-white text-emerald-600 font-semibold px-8 py-3.5 rounded-xl hover:bg-emerald-50 transition-all duration-300 hover:scale-105"
             >
               Let's Connect →
             </Link>

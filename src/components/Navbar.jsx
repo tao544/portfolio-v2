@@ -36,7 +36,7 @@ export default function Navbar() {
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <NavLink to="/" className="text-xl font-bold text-indigo-600 dark:text-white font-mono">
+        <NavLink to="/" className="text-xl font-bold text-emerald-600 dark:text-white font-mono">
   <img 
     src="/images/devwithlogo.png" 
     alt="DevwithTao" 
@@ -55,8 +55,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? 'text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
+                      ? 'text-emerald-600 dark:text-emerald-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400'
                   }`
                 }
               >
@@ -101,7 +101,7 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `text-left text-sm font-medium py-2 border-b border-gray-100 dark:border-gray-800 ${
                   isActive
-                    ? 'text-indigo-600 dark:text-indigo-400'
+                    ? 'text-emerald-600 dark:text-emerald-400'
                     : 'text-gray-700 dark:text-gray-300'
                 }`
               }

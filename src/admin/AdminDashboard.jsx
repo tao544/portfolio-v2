@@ -106,7 +106,7 @@ export default function AdminDashboard() {
         {/* Stats row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
-            { label: 'Total Projects', value: projects.length, color: 'text-indigo-400' },
+            { label: 'Total Projects', value: projects.length, color: 'text-emerald-400' },
             { label: 'Completed', value: projects.filter(p => p.status === 'Completed').length, color: 'text-green-400' },
             { label: 'In Progress', value: projects.filter(p => p.status === 'In Progress').length, color: 'text-blue-400' },
             { label: 'Featured', value: projects.filter(p => p.featured).length, color: 'text-yellow-400' },
@@ -126,12 +126,12 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <p className="text-green-400 text-sm mb-1">✅ CV is uploaded</p>
                 <a href={cvUrl} target="_blank" rel="noreferrer"
-                  className="text-indigo-400 text-sm hover:underline break-all">
+                  className="text-emerald-400 text-sm hover:underline break-all">
                   {cvUrl}
                 </a>
               </div>
               <div className="flex gap-3">
-                <label className="cursor-pointer text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
+                <label className="cursor-pointer text-xs bg-emerald-900/30 text-emerald-400 border border-emerald-800 hover:bg-emerald-900/60 px-3 py-1.5 rounded-lg transition-colors">
                   {cvUploading ? 'Uploading...' : 'Replace CV'}
                   <input type="file" accept=".pdf" onChange={handleCVUpload}
                     className="hidden" disabled={cvUploading} />
@@ -145,7 +145,7 @@ export default function AdminDashboard() {
           ) : (
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <p className="text-gray-400 text-sm flex-1">No CV uploaded yet.</p>
-              <label className="cursor-pointer flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+              <label className="cursor-pointer flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
                 {cvUploading ? 'Uploading...' : '⬆ Upload CV (PDF)'}
                 <input type="file" accept=".pdf" onChange={handleCVUpload}
                   className="hidden" disabled={cvUploading} />
@@ -161,7 +161,7 @@ export default function AdminDashboard() {
             Projects <span className="text-gray-500 font-normal text-base ml-1">({projects.length})</span>
           </h2>
           <button onClick={handleAdd}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:scale-105">
+            className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:scale-105">
             + Add Project
           </button>
         </div>
@@ -169,7 +169,7 @@ export default function AdminDashboard() {
         {/* Loading state */}
         {loading ? (
           <div className="flex justify-center items-center py-20">
-            <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : projects.length === 0 ? (
           <div className="text-center py-20 text-gray-500">
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
                   <select value={project.status}
                     onChange={e => changeStatus(project._id, e.target.value)}
-                    className="text-xs bg-gray-800 border border-gray-700 text-gray-300 rounded-lg px-2 py-1.5 focus:outline-none focus:border-indigo-500">
+                    className="text-xs bg-gray-800 border border-gray-700 text-gray-300 rounded-lg px-2 py-1.5 focus:outline-none focus:border-emerald-500">
                     <option>Planning</option>
                     <option>In Progress</option>
                     <option>Completed</option>
@@ -220,7 +220,7 @@ export default function AdminDashboard() {
                     {project.featured ? '⭐ Featured' : '☆ Feature'}
                   </button>
                   <button onClick={() => handleEdit(project)}
-                    className="text-xs bg-indigo-900/30 text-indigo-400 border border-indigo-800 hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors">
+                    className="text-xs bg-emerald-900/30 text-emerald-400 border border-emerald-800 hover:bg-emerald-900/60 px-3 py-1.5 rounded-lg transition-colors">
                     Edit
                   </button>
                   <button onClick={() => handleDelete(project._id)}

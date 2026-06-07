@@ -37,7 +37,7 @@ export default function Services() {
           {/* Label */}
           <motion.p
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-3"
+            className="text-xs font-semibold tracking-widest text-emerald-500 uppercase mb-3"
           >
             Services
           </motion.p>
@@ -53,7 +53,7 @@ export default function Services() {
           {/* Divider */}
           <motion.hr
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="w-16 border-2 border-indigo-500 mb-12"
+            className="w-16 border-2 border-emerald-500 mb-12"
           />
 
           {/* Service Cards */}
@@ -65,10 +65,10 @@ export default function Services() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 overflow-hidden"
+                className="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all duration-300 overflow-hidden"
               >
                 {/* Hover background sweep */}
-                <div className="absolute inset-0 bg-indigo-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out rounded-2xl" />
+                <div className="absolute inset-0 bg-emerald-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out rounded-2xl" />
 
                 {/* Content */}
                 <div className="relative z-10">
@@ -76,13 +76,13 @@ export default function Services() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-white mb-3 transition-colors duration-300">
                     {s.title}
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400 group-hover:text-indigo-100 text-sm mb-6 transition-colors duration-300">
+                  <p className="text-gray-500 dark:text-gray-400 group-hover:text-emerald-100 text-sm mb-6 transition-colors duration-300">
                     {s.description}
                   </p>
                   <ul className="space-y-2">
                     {s.features.map((f, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors duration-300">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover:bg-white transition-colors duration-300" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:bg-white transition-colors duration-300" />
                         {f}
                       </li>
                     ))}
@@ -106,8 +106,8 @@ export default function Services() {
                 { step: '03', title: 'Development', desc: 'Building the product with clean, maintainable code.' },
                 { step: '04', title: 'Delivery', desc: 'Testing, launching, and supporting your product post-launch.' },
               ].map((p, i) => (
-                <div key={i} className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-indigo-500 transition-all duration-300">
-                  <div className="text-4xl font-black text-indigo-100 dark:text-indigo-900 mb-3">
+                <div key={i} className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-all duration-300">
+                  <div className="text-4xl font-black text-emerald-100 dark:text-emerald-900 mb-3">
                     {p.step}
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">{p.title}</h3>

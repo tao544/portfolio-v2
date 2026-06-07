@@ -30,7 +30,7 @@ export default function Footer() {
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className="text-sm text-gray-400 hover:text-indigo-400 transition-colors duration-200"
+                  className="text-sm text-gray-400 hover:text-emerald-400 transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -50,7 +50,7 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-indigo-600 hover:text-white transition-all duration-300"
+                className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-emerald-600 hover:text-white transition-all duration-300"
               >
                 <i className={s.icon} />
               </a>
